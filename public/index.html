@@ -1,7 +1,7 @@
 <!--
   VAST BOM Calculator - A-VAR Edition
   All calculations are performed in-browser. No backend required.
-  UI colors inspired by https://www.a-var.com
+  UI and branding updated to match VAST Configuration Advisor (vast-space-power-based)
   Author: Cascade AI (with user collaboration)
 -->
 <!DOCTYPE html>
@@ -10,94 +10,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VAST BOM Calculator | A-VAR Edition</title>
-  <!-- Use favicon.ico at project root -->
-  <!-- Use relative path for favicon for static hosting compatibility -->
+  <meta name="description" content="VAST BOM Calculator by A-VAR - Instantly estimate optimal VAST system configurations for your workloads.">
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --av-blue-dark: #1e293b;
-      --av-blue: #1e90ff;
-      --av-orange: #ff6600;
-      --av-gray-light: #f4f6fa;
-      --av-gray: #64748b;
-      --av-text: #334155;
-      --av-white: #fff;
-      --av-shadow: 0 2px 12px rgba(30,41,59,0.07);
+      --avar-primary-blue: #0d6efd;
+      --avar-secondary-accent: #ffc107;
+      --avar-dark: #212529;
+      --avar-body-text: var(--avar-dark);
+      --avar-heading-text: var(--avar-dark);
+      --avar-text-light: #fff;
+      --avar-text-muted: #6c757d;
+      --avar-background-light: #fff;
+      --avar-background-medium: #f8f9fa;
+      --avar-border-color: #dee2e6;
+      --avar-link-color: var(--avar-primary-blue);
+      --avar-font-primary: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+      --avar-font-weight-light: 300;
+      --avar-font-weight-normal: 400;
+      --avar-font-weight-semibold: 600;
+      --avar-font-weight-bold: 700;
+      --avar-border-radius: 0.25rem;
+      --avar-border-radius-lg: 0.3rem;
+      --avar-box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+      --avar-spacing-unit: 1rem;
+      --vast-primary: #06D69F;
+      --vast-secondary: #1FD9FE;
     }
     html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Roboto', Arial, sans-serif;
-      background: var(--av-gray-light);
-      color: var(--av-text);
+      font-family: var(--avar-font-primary);
+      background: #e9ecef;
+      color: var(--avar-body-text);
       min-height: 100vh;
     }
     .header {
-      background: var(--av-blue-dark);
-      color: var(--av-white);
-      padding: 2rem 0 1.2rem 0;
+      background: var(--avar-background-medium);
+      color: var(--avar-heading-text);
       text-align: center;
-      box-shadow: var(--av-shadow);
+      padding: 2.5rem 0 1.5rem 0;
+      border-bottom: 1px solid var(--avar-border-color);
+      position: relative;
     }
-    .header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-      letter-spacing: 1px;
-    }
-    .header .subtitle {
-      font-size: 1.1rem;
-      color: var(--av-blue);
-      margin-top: 0.5rem;
-    }
-    .container {
-      max-width: 640px;
-      background: var(--av-white);
-      margin: 2.5rem auto;
-      border-radius: 14px;
-      box-shadow: var(--av-shadow);
-      padding: 2.5rem 2rem 2rem 2rem;
-    }
-    .modern-form label {
-      display: block;
-      margin-bottom: 1.1rem;
-      font-weight: 500;
-      color: var(--av-blue-dark);
-    }
-    .modern-form input, .modern-form select {
-      display: block;
-      width: 100%;
-      padding: 0.6rem 0.8rem;
-      margin-top: 0.3rem;
-      border: 1px solid var(--av-gray);
-      border-radius: 6px;
-      font-size: 1rem;
-      background: var(--av-gray-light);
-      transition: border-color 0.2s;
-    }
-    .modern-form input:focus, .modern-form select:focus {
-      border-color: var(--av-blue);
-      outline: none;
-    }
-    .profile-list {
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
       margin-bottom: 1.2rem;
     }
-    .profile-row {
-      display: flex;
-      gap: 0.7rem;
-      align-items: center;
-      margin-bottom: 1rem;
-      background: var(--av-gray-light);
-      border-radius: 6px;
-      padding: 0.5rem 0.5rem 0.5rem 0.7rem;
-      box-shadow: 0 1px 4px rgba(30,41,59,0.04);
+    .logo-row img {
+      max-height: 60px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.2rem 0.7rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    .profile-row input, .profile-row select {
-      width: auto;
-      flex: 1 1 0;
+    .header-title {
+      font-size: 2.2rem;
+      font-weight: var(--avar-font-weight-bold);
       margin: 0;
+      letter-spacing: 1px;
     }
-    .profile-row .remove-btn {
+    .header-subtitle {
+      font-size: 1.18rem;
+      color: var(--avar-primary-blue);
+      margin-top: 0.7rem;
+      margin-bottom: 0.8rem;
+      font-weight: var(--avar-font-weight-normal);
+    }
+    .header-directions {
+      font-size: 1.02rem;
+      color: var(--avar-text-muted);
+      margin: 0 auto 1.3rem auto;
+      max-width: 600px;
+    }
+    .container {
+      max-width: 700px;
+      background: var(--avar-background-light);
+      margin: 2.5rem auto;
+      border-radius: var(--avar-border-radius-lg);
+      box-shadow: var(--avar-box-shadow);
+      padding: 2.5rem 2rem 2rem 2rem;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.98rem;
+      color: var(--avar-text-muted);
+      margin-top: 3.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+    .footer a {
+      color: var(--avar-link-color);
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    /* Additional cosmetic tweaks for input forms, buttons, etc. can be added here */
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo-row">
+      <img src="a-var-logo.png" alt="A-VAR Logo" height="45" />
+      <img src="vast-logo.png" alt="VAST Logo" height="45" />
+    </div>
+    <div class="header-title">VAST BOM Calculator</div>
+    <div class="header-subtitle">by A-VAR, Your VAST Data Platform Experts</div>
+    <div class="header-directions">
+      Enter your site and workload details below. Instantly estimate the optimal VAST system configuration for your needs.<br>
+      <b>All calculations are performed in your browser. No data is sent to any server.</b>
+    </div>
+  </div>
+  <div class="container">
+    <!-- Existing app content starts here -->
+
       background: var(--av-orange);
       color: var(--av-white);
       border: none;
@@ -623,7 +654,11 @@
       bomSummary.style.display = '';
       bomForm.style.display = 'none';
     }
-    // End of section-based BOM rendering
-  </script>
+  </div>
+  <div class="footer">
+    &copy; 2024 A-VAR, Inc. | VAST Data Platform Solutions<br>
+    <a href="mailto:info@a-var.com">info@a-var.com</a> | <a href="https://a-var.com" target="_blank">a-var.com</a>
+    <br>Need help or a custom quote? Contact us anytime.
+  </div>
 </body>
 </html>
