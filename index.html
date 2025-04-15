@@ -10,6 +10,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VAST BOM Calculator | A-VAR Edition</title>
+  <!-- Use favicon.ico at project root -->
+  <!-- Use relative path for favicon for static hosting compatibility -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -302,11 +305,12 @@
 <body>
   <div class="header">
     <div class="logo">
-      <!-- Simple A-VAR inspired logo (stylized "A") -->
-      <svg viewBox="0 0 48 48"><polygon points="24,6 44,42 36,42 30.5,31 17.5,31 12,42 4,42"/></svg>
+      <!-- Official A-VAR logo -->
+      <img src="https://www.a-var.com/wp-content/uploads/2024/06/White-on-Transparent-1-1.png" alt="A-VAR Logo" style="width:54px;height:auto;display:block;margin:0 auto;filter:drop-shadow(0 1px 6px #1e293b88);background:transparent;" />
     </div>
     <h1>VAST BOM Calculator</h1>
-    <div class="subtitle">A-VAR Edition &mdash; All in your browser</div>
+    <!-- Brief instructions for user -->
+    <div class="subtitle">Enter site and application details below, then click Calculate BOM.</div>
   </div>
   <div class="container">
     <!--
@@ -342,7 +346,8 @@
           <input type="number" id="bottomU" value="2" min="0" max="20" required />
         </label>
       </div>
-      <div style="margin-top:1.7rem; margin-bottom:0.5rem; font-size:1.1rem; font-weight:700; color:var(--av-blue-dark)">Application Profiles</div>
+      <!-- Clarify that capacity is in TB -->
+<div style="margin-top:1.7rem; margin-bottom:0.5rem; font-size:1.1rem; font-weight:700; color:var(--av-blue-dark)">Application Profiles (Capacity in TB)</div>
       <div class="profile-list" id="profileList"></div>
       <button type="button" class="secondary-btn" id="addProfileBtn">+ Add Application</button>
       <button type="submit" class="primary-btn" id="calcBtn">Calculate BOM</button>
